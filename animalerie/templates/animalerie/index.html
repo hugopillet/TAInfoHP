@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'animalerie/style.css' %}">
+    <title>Animalerie de Hugo Pillet</title>
+</head>
+<body>
+    <h3>Bienvenue à l'animalerie</h3>
+    </div>
+    <div class="operationChoice">
+        <form action="{% url 'animalerie:action' %}" method="post">
+        {% csrf_token %}
+            <h1 class="labelChoix">Quelle action voulez-vous réaliser ?</h1>
+            <div class="flexChoix">
+                <div class="choixAnimal">
+                    <h2 class="labelTitle">Choisissez l'animal</h2>
+                    {% for animal in animals %}
+                        <input type="radio" name="animal" id="animal{{ forloop.counter }}" value="{{ animal.id }}">
+                        <label for="animal{{ forloop.counter }}">{{ animal.nom }}
+                        </label><br>
+                    {% endfor %}
+                </div>
+                <div class="choixAction">
+                    <h2 class="labelTitle" >Choisissez l'action</h2>
+                    <form action="">
+                        <input type="radio" name="action" id="0" value="nourrir">Nourrir<br>
+                        <input type="radio" name="action" id="1" value="divertir">Divertir<br>
+                        <input type="radio" name="action" id="2" value="coucher">Coucher<br>
+                        <input type="radio" name="action" id="3" value="reveiller">Reveiller<br>
+                </div>
+            </div>
+
+            <button class="goAction" type="submit" value="Action"> C'est Parti !</button>
+        </form>
+    </div>
+    <h4> Description de l'animalerie </h4>
+    <div class="listes">
+        <div class="animalsList">
+            <h2>Animaux :</h2>
+            {% for animal in animals %}
+                <div class="oneAnimal">
+                    <h1 class="name">{{animal.nom}}</h1>
+                    <p>Lieu : {{animal.lieu}}</p>
+                    <p>Type : {{animal.type}}</p>
+                    <p>Etat : {{animal.etat}}</p>
+                    <p>Race : {{animal.race}}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="equipementsList">
+            <h2>Équipements :</h2>
+            {% for equipement in equipements %}
+                <div class="oneEquipement">
+                    <h1 class="name">{{equipement.nom}}</h1>
+                    <p>Disponibilité : {{equipement.dispo}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+<footer>
+    <h1>Animalerie de Hugo Pillet</h1>
+</footer>
+<img src="artistic-blossom-bright-207962.jpg" alt="">
+</body>
+</html>
